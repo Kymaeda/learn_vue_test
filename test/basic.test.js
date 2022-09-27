@@ -22,3 +22,28 @@ test('object class is proper', () => {
   expect(example).toBeDefined();
   expect(example).toBeInstanceOf(Example);
 })
+
+test('objects', () => {
+  const object1 = {
+    name: 'Kyohei',
+    type: 'instructor',
+    grade: 3,
+  }
+  const object2 = {
+    name: 'Kyohei',
+    type: 'instructor',
+    grade: 3,
+  };
+
+  const subset = {
+    type: 'instructor',
+  };
+
+  expect(object1).toEqual(object2)
+  expect(object1).toMatchObject(subset)
+})
+
+test('array', () => {
+  expect([1, 2]).toEqual([1, 2])
+  expect([1, 2, 3]).toContain(1)
+})

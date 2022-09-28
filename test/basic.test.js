@@ -1,4 +1,4 @@
-import { test, expect } from "vitest";
+import { test, expect, beforeEach } from "vitest";
 
 test('2+2=4', () => {
   expect(2+2).toBe(4)
@@ -46,4 +46,20 @@ test('objects', () => {
 test('array', () => {
   expect([1, 2]).toEqual([1, 2])
   expect([1, 2, 3]).toContain(1)
+})
+
+
+let dataArray;
+beforeEach(() => {
+  dataArray = [1, 2, 3];
+});
+
+test('item removed from array', () => {
+  const value = dataArray.shift()
+  expect(value).toEqual(1)
+  expect(dataArray).toHaveLength(2)
+})
+
+test('test normal array', () => {
+  expect(dataArray).toHaveLength(3)
 })

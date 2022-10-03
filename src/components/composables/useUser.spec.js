@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest';
+import { test, expect, vi } from 'vitest';
 import { useUserSimple } from './useUser';
 // NOTE: use fetch which is originally built in browser
 import fetch from 'node-fetch';
@@ -34,7 +34,12 @@ const calculator = {
   },
 };
 
-test('mocking', () => {
+test('without mocking', () => {
   const tax = calculator.tax(100, realTaxRule)
   expect(tax).toBe(10)
+})
+
+test('mocking', () => {
+  const mock = vi.fn().mockReturnValue(0.19)
+  expect(calculator.tax(100, mock)).toBe(19);
 })

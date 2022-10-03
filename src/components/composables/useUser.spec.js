@@ -12,3 +12,29 @@ test('simple composable', async () => {
   expect(user.value).toHaveProperty('name', 'Piotr Jura');
   expect(user.value).toHaveProperty('id', 39863283);
 })
+
+const realTaxRule = (amount) => {
+  if (amount < 100) {
+    return 0.05;
+  } else if (amount >= 100 && amount < 200) {
+    return 0.1;
+  } else {
+    return 0.2;
+  }
+};
+const calculator = {
+  tax: (amount, taxRuleFunc) => {
+    console.log('Original tax() called: ');
+
+    if (amount === 0) {
+      return 0;
+    }
+
+    return taxRuleFunc(amount) * amount;
+  },
+};
+
+test('mocking', () => {
+  const tax = calculator.tax(100, realTaxRule)
+  expect(tax).toBe(10)
+})

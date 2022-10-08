@@ -1,7 +1,14 @@
-import { test, expect, vi } from 'vitest';
+import { test, expect, vi, beforeAll, afterAll } from 'vitest';
 import { useUserSimple } from './useUser';
 // NOTE: use fetch which is originally built in browser
 import fetch from 'node-fetch';
+import { setupServer } from 'msw/node';
+import handers from './../../mocks/handlers';
+
+const server = setupServer(...handers)
+
+beforeAll(() => server.listen())
+afterAll(() => server.close());
 
 window.fetch = fetch
 
